@@ -1,0 +1,35 @@
+# Ingress - routing HTTP theo host và path
+# Yêu cầu: đã cài Ingress controller (ví dụ ingress-nginx)
+# Service nginx-service (từ 01-fundamentals/deployment-example.yaml) phải tồn tại
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    # Ingress controller nginx: chỉnh kích thước body nếu cần
+    # nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+spec:
+  ingressClassName: nginx   # Chọn class (ingress-nginx dùng class "nginx")
+  rules:
+    # Host-based: app.example.com -> nginx-service
+    - host: app.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80
+    # Path-based: api.example.com/api -> api-svc (cần tạo Service api-svc)
+    # - host: api.example.com
+    #   http:
+    #     paths:
+    #       - path: /api
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: api-svc
+    #             port:
+    #               number: 80

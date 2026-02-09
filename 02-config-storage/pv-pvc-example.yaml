@@ -1,0 +1,29 @@
+# PV + PVC - dùng hostPath (phù hợp minikube/kind, single node)
+# Production: dùng NFS, cloud volume (EBS, Persistent Disk), hoặc CSI driver
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-app-data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /data/app
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-app-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 1Gi

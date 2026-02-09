@@ -1,0 +1,13 @@
+# NetworkPolicy: default deny - chặn mọi ingress và egress cho tất cả Pod trong namespace
+# PodSelector {} = chọn tất cả Pod. ingress/egress rỗng = không cho phép gì.
+# Sau khi apply, cần thêm policy khác để mở DNS (egress 53) và traffic cần thiết
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress

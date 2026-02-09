@@ -1,0 +1,10 @@
+# Instance của CRD Hello (sau khi apply hello-crd.yaml)
+apiVersion: example.com/v1
+kind: Hello
+metadata:
+  name: my-hello
+  namespace: default
+spec:
+  message: "Hello from CRD"
+status:
+  phase: Pending

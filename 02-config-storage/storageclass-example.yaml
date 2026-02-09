@@ -1,0 +1,10 @@
+# StorageClass - dùng khi cluster hỗ trợ dynamic provisioning
+# Minikube/kind thường có sẵn "standard" hoặc "hostpath"; file này là mẫu tham khảo
+# provisioner phụ thuộc môi trường (kubernetes.io/no-provisioner, ebs.csi.aws.com, ...)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+# Dùng với Local volume (PV tạo thủ công, PVC chỉ định storageClassName: local-storage)

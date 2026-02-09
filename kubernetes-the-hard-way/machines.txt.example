@@ -1,0 +1,12 @@
+# Kubernetes The Hard Way - Máy của bạn
+# Copy file này thành machines.txt trên jumpbox và dùng trong các lab.
+# Format: IPV4_ADDRESS FQDN HOSTNAME POD_SUBNET (server không có cột POD_SUBNET)
+#
+# jumpbox: 192.168.1.10 (không có trong file này, chỉ dùng server + workers)
+# master  = server  = 192.168.1.11
+# worker01 = node-0 = 192.168.1.12
+# worker02 = node-1 = 192.168.1.13
+
+192.168.1.11 server.kubernetes.local server
+192.168.1.12 node-0.kubernetes.local node-0 10.200.0.0/24
+192.168.1.13 node-1.kubernetes.local node-1 10.200.1.0/24

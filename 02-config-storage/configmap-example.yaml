@@ -1,0 +1,14 @@
+# ConfigMap - cấu hình không nhạy cảm (key-value)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: default
+data:
+  # Key-value đơn giản
+  APP_ENV: "development"
+  LOG_LEVEL: "info"
+  # Nội dung file (nhiều dòng dùng | hoặc |-)
+  app.conf: |
+    server.port=8080
+    server.name=myapp

@@ -1,0 +1,10 @@
+# Namespace với Pod Security Admission: enforce baseline
+# Pod tạo trong namespace này phải thỏa PSS baseline (không privilege escalation, ...)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-baseline
+  labels:
+    pod-security.kubernetes.io/enforce: baseline
+    pod-security.kubernetes.io/audit: baseline
+    pod-security.kubernetes.io/warn: baseline

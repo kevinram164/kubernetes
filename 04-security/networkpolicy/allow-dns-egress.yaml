@@ -1,0 +1,21 @@
+# NetworkPolicy: cho phép egress DNS (port 53) tới kube-system (CoreDNS)
+# Cần apply khi đã có default-deny-all để Pod vẫn resolve được tên
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-egress
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53

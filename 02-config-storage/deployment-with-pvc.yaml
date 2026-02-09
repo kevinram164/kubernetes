@@ -1,0 +1,29 @@
+# Deployment mount PVC vào container
+# Cần tạo PV + PVC trước: kubectl apply -f pv-pvc-example.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-with-pvc
+  labels:
+    app: app-with-pvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-with-pvc
+  template:
+    metadata:
+      labels:
+        app: app-with-pvc
+    spec:
+      containers:
+        - name: app
+          image: busybox:1.36
+          command: ["sh", "-c", "echo 'hello' >> /data/hello.txt; cat /data/hello.txt; sleep 3600"]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pvc-app-data

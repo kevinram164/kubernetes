@@ -1,0 +1,30 @@
+# Pod với securityContext an toàn: runAsNonRoot, readOnlyRootFilesystem, allowPrivilegeEscalation: false
+# Thỏa PSS restricted khi namespace enforce restricted
+apiVersion: v1
+kind: Pod
+metadata:
+  name: safe-pod
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: app
+      image: nginx:1.25-alpine
+      ports:
+        - containerPort: 80
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: ["ALL"]
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+  volumes:
+    - name: tmp
+      emptyDir: {}

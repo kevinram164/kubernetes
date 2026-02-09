@@ -1,0 +1,10 @@
+# Namespace với Pod Security Admission: enforce restricted
+# Pod phải: runAsNonRoot, readOnlyRootFilesystem, drop ALL capabilities, ...
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-restricted
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted

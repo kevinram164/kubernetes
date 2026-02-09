@@ -1,0 +1,17 @@
+# Role: deploy (create/update/patch/delete) deployments, pods, configmaps, secrets trong namespace
+# Không có delete deployment/pod nếu muốn hạn chế xóa
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: deployer
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "configmaps", "secrets", "services"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get"]

@@ -1,0 +1,16 @@
+# Copy file này thành terraform.tfvars và chỉnh giá trị
+# cp terraform.tfvars.example terraform.tfvars
+
+# BẮT BUỘC: thay YOUR_PROJECT_ID bằng GCP Project ID của bạn
+project_id   = "YOUR_PROJECT_ID"
+region       = "asia-southeast1"
+cluster_name = "my-gke"
+
+# Tùy chọn: subnet, node
+# subnet_cidr             = "10.0.0.0/20"
+# pods_secondary_cidr    = "10.4.0.0/14"
+# services_secondary_cidr = "10.8.0.0/20"
+# node_machine_type      = "e2-medium"
+# node_count             = 2
+# node_min_count         = 1
+# node_max_count         = 3

@@ -1,0 +1,13 @@
+# Service type LoadBalancer: cloud (GKE, EKS, AKS) tạo LB ngoài
+# Bare metal / on-prem: cần MetalLB hoặc tương đương để cấp IP
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
